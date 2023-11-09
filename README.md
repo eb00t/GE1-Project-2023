@@ -34,4 +34,5 @@
 
 ### What I Learned:
 
-### Proposal submitted earlier can go here: 
+### Proposal:
+Space-ketball - A VR game that involves throwing planets around. The planets are all out of whack! Using the rings as your hoop, you must throw each planet into the correct set of rings. The game gets progressively harder the farther along you go.
