@@ -1,36 +1,46 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class TColl : MonoBehaviour
 {
-    private Collider TCollider;
+    private Collider TCollider, BallColl;
     public static bool Hit;
     private GameManager GameManager;
     private GameObject Ball;
     private Rigidbody BallBody;
     private GameObject PlanA;
+    private bool Bald;
     // Start is called before the first frame update
     void Start()
     {
-        PlanA = GameObject.Find("PlanA");
+        PlanA = GameObject.Find("BBallHoop");
         Ball = GameObject.Find("BallA");
+        BallColl = Ball.GetComponent<Collider>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+        if (Bald == true)
+        {
+            Ball.transform.position = PlanA.transform.position;
+        }
     }
-    
+
     void OnTriggerEnter(Collider other)
     {
         Ball.transform.SetParent(PlanA.transform);
-        Ball.transform.position = gameObject.transform.position;
-        TCollider.enabled = false;
         BallBody = Ball.GetComponent<Rigidbody>();
-        BallBody.constraints = RigidbodyConstraints.FreezeAll;
+        BallBody.isKinematic = true;
+        Bald = true;
         Hit = true;
+        BallColl.enabled = false;
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        TCollider.enabled = false;
     }
 
     void TestWin()
