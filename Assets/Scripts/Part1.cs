@@ -2,10 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class Part1 : MonoBehaviour
 {
+    //Wall Stuff
     public GameObject[] Walls;
+    private Animator WallAnim;
+    private GameObject WallParent;
     private Rigidbody WallRig;
+    
     private GameObject Ding;
     private Vector3 StartScale, TargetScale;
 
@@ -22,7 +26,7 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        if (TColl.Hit == true)
+        if (TColl.Hit)
         {
             foreach (GameObject gm in Walls)
             {
@@ -32,6 +36,7 @@ public class GameManager : MonoBehaviour
                     WallRig.useGravity = false;
                     StartCoroutine(Disappear());
             }
+            
             TColl.Hit = false;
         }
     }
@@ -39,14 +44,20 @@ public class GameManager : MonoBehaviour
     private IEnumerator Disappear()
     {
         yield return new WaitForSecondsRealtime(7f);
-        foreach (GameObject wall in Walls)
+        WallParent = GameObject.FindWithTag("WallParent");
+        WallAnim = WallParent.GetComponent<Animator>();
+        WallAnim.SetBool("Shrink", true);
+        yield return new WaitForSecondsRealtime(3f);
+        Destroy(WallParent);
+        /*foreach (GameObject wall in Walls)
         {
-            //Code modified from https://forum.unity.com/threads/how-to-make-gameobject-gradually-decrease-in-size.1033645/
+
+            Code modified from https://forum.unity.com/threads/how-to-make-gameobject-gradually-decrease-in-size.1033645/
             StartScale = gameObject.transform.localScale;
             TargetScale = Vector3.one * 0.5f;
-            wall.transform.localScale = Vector3.Slerp(StartScale, TargetScale, Time.deltaTime / 10);
-            //yield return new WaitForSecondsRealtime(3f);
-            //Destroy(wall);
-        }
+            wall.transform.localScale = Vector3.Slerp(StartScale, TargetScale, Time.deltaTime / 5f);*/
+        //yield return new WaitForSecondsRealtime(3f);
+        //Destroy(wall);
     }
 }
+
