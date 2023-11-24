@@ -29,5 +29,10 @@ public class ParticleHandler : MonoBehaviour
         BallParticles1.transform.position = gameObject.transform.position;
         BallParticles1.transform.rotation = gameObject.transform.rotation;
         BallParticles2.transform.position = gameObject.transform.position;
+
+        if (TColl.BallBody.isKinematic)
+        {
+            BallParticlesEmission1.enabled = false;
+        }
     }
 }

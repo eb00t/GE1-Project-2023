@@ -9,7 +9,7 @@ public class TColl : MonoBehaviour
     public static bool Hit;
     private Part1 Part1;
     private GameObject Ball, Hoop;
-    private Rigidbody BallBody;
+    public Rigidbody BallBody;
     private GameObject PlanA;
     private bool Bald, RB;
     public ParticleHandler ParticleHandler;
@@ -20,6 +20,7 @@ public class TColl : MonoBehaviour
         PlanA = GameObject.Find("BallHold");
         Hoop = GameObject.Find("BBallHoop");
         Ball = GameObject.Find("BallA");
+        BallBody = Ball.GetComponent<Rigidbody>();
         BallColl = Ball.GetComponent<Collider>();
         RB = false;
     }

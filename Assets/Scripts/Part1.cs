@@ -6,22 +6,18 @@ public class Part1 : MonoBehaviour
 {
     //Wall Stuff
     public GameObject[] Walls;
+    public GameObject[] PhaseFloors;
     private Animator WallAnim;
     private GameObject WallParent;
     private Rigidbody WallRig;
-    
+    private Animator FloorAnim;
     private GameObject Ding;
     private Vector3 StartScale, TargetScale;
 
     void Start()
     {
         Walls = GameObject.FindGameObjectsWithTag("BreakAway");
-        /*foreach (GameObject gm in Walls)
-        {
-            WallRig = gm.GetComponent<Rigidbody>();
-            WallRig.constraints = RigidbodyConstraints.FreezeAll;
-            WallRig.useGravity = true;
-        }*/
+        PhaseFloors = GameObject.FindGameObjectsWithTag("PhaseFloor");
     }
 
     void Update()
@@ -30,13 +26,17 @@ public class Part1 : MonoBehaviour
         {
             foreach (GameObject gm in Walls)
             {
-                    gm.AddComponent<Rigidbody>();
+                gm.AddComponent<Rigidbody>();
                     WallRig = gm.GetComponent<Rigidbody>();
                     //WallRig.constraints = RigidbodyConstraints.FreezeAll;
                     WallRig.useGravity = false;
                     StartCoroutine(Disappear());
             }
-            
+            foreach (GameObject pf in PhaseFloors)
+            {
+                FloorAnim = pf.GetComponent<Animator>();
+                FloorAnim.SetBool("Appear", true);
+            }
             TColl.Hit = false;
         }
     }
@@ -48,7 +48,7 @@ public class Part1 : MonoBehaviour
         WallAnim = WallParent.GetComponent<Animator>();
         WallAnim.SetBool("Shrink", true);
         yield return new WaitForSecondsRealtime(3f);
-        Destroy(WallParent);
+        WallParent.SetActive(false);
         /*foreach (GameObject wall in Walls)
         {
 

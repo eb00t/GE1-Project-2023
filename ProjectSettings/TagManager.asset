@@ -7,6 +7,7 @@ TagManager:
   - BreakAway
   - WallParent
   - Planet
+  - PhaseFloor
   layers:
   - Default
   - TransparentFX
