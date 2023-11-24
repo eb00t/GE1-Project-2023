@@ -20,9 +20,10 @@
  	
 | Class/Asset | Source |
 |---|---|
-| MyClass.cs | Self written |
-| MyClass1.cs | Modified from reference |
-| MyClass2.cs |	From reference |	
+| Part1.cs | Self written |
+| TColl.cs | Self written |
+| ParticleHandler.cs |	Self written |	
+| Starfield Skybox | PULSAR BYTES - Unity Asset Store [LINK](https://assetstore.unity.com/packages/2d/textures-materials/sky/starfield-skybox-92717) |
  	
 
 ### References
