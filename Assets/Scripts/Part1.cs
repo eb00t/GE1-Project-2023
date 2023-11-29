@@ -7,17 +7,26 @@ public class Part1 : MonoBehaviour
     //Wall Stuff
     public GameObject[] Walls;
     public GameObject[] PhaseFloors;
+    public GameObject PhaseFloorsParent;
+    public Animator ButtonAnim;
     private Animator WallAnim;
     private GameObject WallParent;
     private Rigidbody WallRig;
     private Animator FloorAnim;
     private GameObject Ding;
     private Vector3 StartScale, TargetScale;
+    
 
     void Start()
     {
         Walls = GameObject.FindGameObjectsWithTag("BreakAway");
         PhaseFloors = GameObject.FindGameObjectsWithTag("PhaseFloor");
+        PhaseFloorsParent = GameObject.Find("PhaseFloorsParent");
+        ButtonAnim = GameObject.Find("InteractableButton").GetComponent<Animator>();
+        ButtonAnim.SetBool("FlyIn", false);
+        WallParent = GameObject.FindWithTag("WallParent");
+        WallAnim = WallParent.GetComponent<Animator>();
+        PhaseFloorsParent.SetActive(false);
     }
 
     void Update()
@@ -27,16 +36,17 @@ public class Part1 : MonoBehaviour
             foreach (GameObject gm in Walls)
             {
                 gm.AddComponent<Rigidbody>();
-                    WallRig = gm.GetComponent<Rigidbody>();
-                    //WallRig.constraints = RigidbodyConstraints.FreezeAll;
-                    WallRig.useGravity = false;
-                    StartCoroutine(Disappear());
+                WallRig = gm.GetComponent<Rigidbody>();
+                //WallRig.constraints = RigidbodyConstraints.FreezeAll
+                WallRig.useGravity = false;
+                StartCoroutine(Disappear());
             }
+            /*PhaseFloorsParent.SetActive(true);
             foreach (GameObject pf in PhaseFloors)
             {
                 FloorAnim = pf.GetComponent<Animator>();
                 FloorAnim.SetBool("Appear", true);
-            }
+            }*/
             TColl.Hit = false;
         }
     }
@@ -44,11 +54,11 @@ public class Part1 : MonoBehaviour
     private IEnumerator Disappear()
     {
         yield return new WaitForSecondsRealtime(7f);
-        WallParent = GameObject.FindWithTag("WallParent");
-        WallAnim = WallParent.GetComponent<Animator>();
+       
         WallAnim.SetBool("Shrink", true);
         yield return new WaitForSecondsRealtime(3f);
         WallParent.SetActive(false);
+        ButtonAnim.SetBool("FlyIn", true);
         /*foreach (GameObject wall in Walls)
         {
 

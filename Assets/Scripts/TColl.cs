@@ -35,26 +35,32 @@ public class TColl : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        Ball.transform.SetParent(PlanA.transform);
-        BallBody = Ball.GetComponent<Rigidbody>();
-        BallBody.isKinematic = true;
-        Bald = true;
-        Hit = true;
-        BallColl.enabled = false;
-        if (RB == false)
+        if (other == GameObject.FindWithTag("Planet").GetComponent<Collider>())
         {
-            RB = true;
-            Hoop.AddComponent<Rigidbody>();
-            Hoop.GetComponent<Rigidbody>().useGravity = false;
-            ParticleHandler.BallParticlesEmission1.enabled = false;
-            ParticleHandler.BallParticlesEmission2.enabled = true;
+            Ball.transform.SetParent(PlanA.transform);
+            BallBody = Ball.GetComponent<Rigidbody>();
+            BallBody.isKinematic = true;
+            Bald = true;
+            Hit = true;
+            BallColl.enabled = false;
+            if (RB == false)
+            {
+                RB = true;
+                Hoop.AddComponent<Rigidbody>();
+                Hoop.GetComponent<Rigidbody>().useGravity = false;
+                ParticleHandler.BallTrail.SetActive(true);
+                ParticleHandler.BallParticlesEmission.enabled = true;
+            }
         }
-        
+        else
+        {
+            Debug.Log("Not a planet.");
+        }
     }
 
-    private void OnTriggerExit(Collider other)
+    /*private void OnTriggerExit(Collider other)
     {
         TCollider.enabled = false;
-    }
+    }*/
     
 }
