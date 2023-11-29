@@ -12717,7 +12717,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_LocomotionProvider: {fileID: 1330744148}
-  m_MinHeight: 4
+  m_MinHeight: 0
   m_MaxHeight: Infinity
 --- !u!143 &1212048947
 CharacterController:
@@ -12742,7 +12742,7 @@ CharacterController:
   m_Radius: 0.5
   m_SlopeLimit: 45
   m_StepOffset: 0.3
-  m_SkinWidth: 4
+  m_SkinWidth: 20
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1240166618
