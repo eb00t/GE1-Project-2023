@@ -15,7 +15,7 @@ public class Part1 : MonoBehaviour
     private Animator FloorAnim;
     private GameObject Ding;
     private Vector3 StartScale, TargetScale;
-    
+
 
     void Start()
     {
@@ -41,12 +41,7 @@ public class Part1 : MonoBehaviour
                 WallRig.useGravity = false;
                 StartCoroutine(Disappear());
             }
-            /*PhaseFloorsParent.SetActive(true);
-            foreach (GameObject pf in PhaseFloors)
-            {
-                FloorAnim = pf.GetComponent<Animator>();
-                FloorAnim.SetBool("Appear", true);
-            }*/
+
             TColl.Hit = false;
         }
     }
@@ -54,7 +49,7 @@ public class Part1 : MonoBehaviour
     private IEnumerator Disappear()
     {
         yield return new WaitForSecondsRealtime(7f);
-       
+
         WallAnim.SetBool("Shrink", true);
         yield return new WaitForSecondsRealtime(3f);
         WallParent.SetActive(false);
@@ -69,5 +64,15 @@ public class Part1 : MonoBehaviour
         //yield return new WaitForSecondsRealtime(3f);
         //Destroy(wall);
     }
-}
 
+    public void SpawnPlatforms()
+    {
+        
+        PhaseFloorsParent.SetActive(true);
+        foreach (GameObject pf in PhaseFloors)
+        {
+            FloorAnim = pf.GetComponent<Animator>();
+            FloorAnim.SetBool("Appear", true);
+        }
+    }
+}

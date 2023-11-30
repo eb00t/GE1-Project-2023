@@ -35,7 +35,7 @@ public class TColl : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other == GameObject.FindWithTag("Planet").GetComponent<Collider>())
+        if (other.gameObject.CompareTag("Planet"))
         {
             Ball.transform.SetParent(PlanA.transform);
             BallBody = Ball.GetComponent<Rigidbody>();
