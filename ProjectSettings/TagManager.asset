@@ -9,6 +9,8 @@ TagManager:
   - Planet
   - PhaseFloor
   - Hand
+  - PlanetA
+  - PlanetB
   layers:
   - Default
   - TransparentFX

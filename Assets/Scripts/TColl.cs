@@ -6,28 +6,31 @@ using UnityEngine;
 public class TColl : MonoBehaviour
 {
     private Collider TCollider, BallColl;
-    public static bool Hit;
-    private Part1 Part1;
-    private GameObject Ball, Hoop;
+    public static int Hit;
+    private GameManager GameManager;
+    public GameObject Ball, Hoop;
     public Rigidbody BallBody;
-    private GameObject PlanA;
-    private bool Bald, RB;
+    public static GameObject BallB, HoopB;
+    private GameObject PlanA, PlanB, PlanC, PlanD, PlanE;
+    private bool BaldA, BaldB, RB;
     public ParticleHandler ParticleHandler;
     // Start is called before the first frame update
     void Start()
     {
         ParticleHandler = GameObject.Find("BallA").GetComponent<ParticleHandler>();
-        PlanA = GameObject.Find("BallHold");
-        Hoop = GameObject.Find("BBallHoop");
         Ball = GameObject.Find("BallA");
-        BallBody = Ball.GetComponent<Rigidbody>();
-        BallColl = Ball.GetComponent<Collider>();
+        PlanA = gameObject.GetComponentInChildren<SearchTerm>().gameObject;
+        BallB = GameObject.FindWithTag("PlanetB");
+        HoopB = GameObject.Find("BallHoop2");
+        Hoop = GameObject.Find("BBallHoop");
         RB = false;
+        BallB.SetActive(false);
+        HoopB.SetActive(false);
     }
 
     private void Update()
     {
-        if (Bald)
+        if (BaldA)
         {
             Ball.transform.position = PlanA.transform.position;
         }
@@ -35,26 +38,40 @@ public class TColl : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Planet"))
+        Hoop = gameObject;
+        Ball = other.gameObject;
+        BallBody = Ball.GetComponent<Rigidbody>();
+        BallColl = Ball.GetComponent<Collider>();
+        if (other.gameObject.CompareTag("PlanetA"))
         {
             Ball.transform.SetParent(PlanA.transform);
-            BallBody = Ball.GetComponent<Rigidbody>();
             BallBody.isKinematic = true;
-            Bald = true;
-            Hit = true;
+            BaldA = true;
+            Hit = 1;
             BallColl.enabled = false;
-            if (RB == false)
-            {
-                RB = true;
-                Hoop.AddComponent<Rigidbody>();
-                Hoop.GetComponent<Rigidbody>().useGravity = false;
-                ParticleHandler.BallTrail.SetActive(true);
-                ParticleHandler.BallParticlesEmission.enabled = true;
-            }
+            
+        }
+        if (other.gameObject.CompareTag("PlanetB"))
+        {
+            Ball.transform.SetParent(PlanB.transform);
+            BallBody.isKinematic = true;
+            BaldB = true;
+            Hit = 2;
+            BallColl.enabled = false;
         }
         else
         {
             Debug.Log("Not a planet.");
+        }
+        
+        if (RB == false)
+        {
+            RB = true;
+            Hoop.AddComponent<Rigidbody>();
+            Hoop.GetComponent<Rigidbody>().useGravity = false;
+            ParticleHandler.BallTrail = Ball.GetComponentInChildren<TrailRenderer>();
+            //ParticleHandler.BallTrail.gameObject.SetActive(false);
+            ParticleHandler.BallParticlesEmission.enabled = true;
         }
     }
 
