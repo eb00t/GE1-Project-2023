@@ -54,6 +54,7 @@ public class Part1 : MonoBehaviour
         yield return new WaitForSecondsRealtime(3f);
         WallParent.SetActive(false);
         ButtonAnim.SetBool("FlyIn", true);
+        SpawnPlatforms();
         /*foreach (GameObject wall in Walls)
         {
 
@@ -67,7 +68,6 @@ public class Part1 : MonoBehaviour
 
     public void SpawnPlatforms()
     {
-        
         PhaseFloorsParent.SetActive(true);
         foreach (GameObject pf in PhaseFloors)
         {
