@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     private GameObject Ding;
     private Vector3 StartScale, TargetScale;
     private bool FirstActivate, SecondActivate;
+    public TColl TColl;
 
 
     void Start()
@@ -46,6 +47,7 @@ public class GameManager : MonoBehaviour
                 WallRig.useGravity = false;
                 StartCoroutine(Disappear());
             }
+            TColl.Hit++;
         }
     }
 
@@ -78,7 +80,5 @@ public class GameManager : MonoBehaviour
             FloorAnim.SetBool("Appear", true);
         }
         PlanetAnims.SetBool("Stop", true);
-        TColl.BallB.SetActive(true);
-        TColl.HoopB.SetActive(true);
     }
 }
