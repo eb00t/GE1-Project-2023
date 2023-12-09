@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class PlanetMove : MonoBehaviour
 {
+    //I couldn't get this to work.
     public bool Moving;
     public GameObject StartWP, EndWP;
     public List<GameObject> Waypoints;
