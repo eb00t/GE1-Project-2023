@@ -12,6 +12,9 @@ TagManager:
   - PlanetA
   - PlanetB
   - Exclude
+  - BlackHole
+  - DropTrig1
+  - DropTrig2
   layers:
   - Default
   - TransparentFX

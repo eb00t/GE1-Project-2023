@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
     public GameObject PhaseFloorsParent;
     public Animator ButtonAnim;
     private Animator WallAnim, PlanetAnims;
-    private GameObject WallParent;
+    private GameObject WallParent, PlanB, PlanBM;
     private Rigidbody WallRig;
     private Animator FloorAnim;
     private GameObject Ding;
@@ -32,6 +32,8 @@ public class GameManager : MonoBehaviour
         PhaseFloorsParent.SetActive(false);
         PlanetAnims.SetBool("Stop", false);
         FirstActivate = false;
+        PlanB = GameObject.Find("PlanB");
+        PlanBM = GameObject.Find("PlanBMoon");
     }
 
     void Update()
@@ -47,7 +49,14 @@ public class GameManager : MonoBehaviour
                 WallRig.useGravity = false;
                 StartCoroutine(Disappear());
             }
-            TColl.Hit++;
+        }
+        if (TColl.Hit == 2 && FirstActivate == false)
+        {
+            FirstActivate = true;
+            PlanB.GetComponent<Rigidbody>().useGravity = true;
+            PlanB.GetComponent<Rigidbody>().isKinematic = false;
+            PlanBM.GetComponent<Rigidbody>().useGravity = true;
+            PlanBM.GetComponent<Rigidbody>().isKinematic = false;
         }
     }
 
@@ -79,6 +88,9 @@ public class GameManager : MonoBehaviour
             FloorAnim = pf.GetComponent<Animator>();
             FloorAnim.SetBool("Appear", true);
         }
+
         PlanetAnims.SetBool("Stop", true);
+        PlanetAnims.speed = 3;
+        FirstActivate = false;
     }
 }

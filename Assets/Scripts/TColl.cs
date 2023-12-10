@@ -11,9 +11,9 @@ public class TColl : MonoBehaviour
     public GameObject Ball, Hoop;
     public Rigidbody BallBody;
     public static GameObject BallB, HoopB;
-    private GameObject PlanA, PlanB, PlanC, PlanD, PlanE;
+    private GameObject PlanA, PlanB, PlanC;
     private GameObject PermaBallA, PermaBallB;
-    private bool BaldA, BaldB, RB;
+    private bool RB;
     public ParticleHandler ParticleHandler;
     // Start is called before the first frame update
     void Start()
@@ -47,7 +47,6 @@ public class TColl : MonoBehaviour
         {
             Ball.transform.SetParent(PlanA.transform);
             BallBody.isKinematic = true;
-            BaldA = true;
             Hit = 1;
             BallColl.enabled = false;
             PermaBallA = Ball;
@@ -56,7 +55,6 @@ public class TColl : MonoBehaviour
         {
             Ball.transform.SetParent(PlanB.transform);
             BallBody.isKinematic = true;
-            BaldB = true;
             Hit = 2;
             BallColl.enabled = false;
             PermaBallB = Ball;
@@ -71,15 +69,11 @@ public class TColl : MonoBehaviour
             RB = true;
             Hoop.AddComponent<Rigidbody>();
             Hoop.GetComponent<Rigidbody>().useGravity = false;
+            Hoop.GetComponent<Rigidbody>().isKinematic = true;
             //ParticleHandler.BallTrail = Ball.GetComponentInChildren<TrailRenderer>();
             //ParticleHandler.BallTrail.gameObject.SetActive(false);
             //ParticleHandler.BallParticlesEmission.enabled = true;
         }
     }
-
-    /*private void OnTriggerExit(Collider other)
-    {
-        TCollider.enabled = false;
-    }*/
     
 }

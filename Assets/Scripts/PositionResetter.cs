@@ -12,7 +12,7 @@ public class PositionResetter : MonoBehaviour
     {
         StartPos = gameObject.transform.position;
         ObjRB = GetComponent<Rigidbody>();
-        ObjRB.isKinematic = false;
+        ObjRB.isKinematic = true;
     }
 
     public void Reset()
