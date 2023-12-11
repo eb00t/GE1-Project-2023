@@ -1,11 +1,12 @@
 # Game Engines 1 Project 2023 (Working Title)
 
 ### Name: 
-
+Eoghan O'Reilly
 ### Student Number: 
+C21430996
 
 ### Class Group: 
-
+TU984 - Game Design
 ### Video:
 
 [INSERT LINK HERE]
@@ -20,10 +21,15 @@
  	
 | Class/Asset | Source |
 |---|---|
-| Part1.cs | Self written |
+| GameManager.cs | Self written |
 | TColl.cs | Self written |
 | ParticleHandler.cs |	Self written |	
-| Starfield Skybox | PULSAR BYTES - Unity Asset Store [LINK](https://assetstore.unity.com/packages/2d/textures-materials/sky/starfield-skybox-92717) |
+| Starfield Skybox | PULSAR BYTES - Unity Asset Store ([LINK](https://assetstore.unity.com/packages/2d/textures-materials/sky/starfield-skybox-92717)) |
+| Outline Shader | Digvijaysinh Gohil - Youtube ([LINK](https://www.youtube.com/watch?v=JCXYR_5vhNc)) |
+| PositionResetter.cs | Self written |
+| BSpawn.cs | Self written |
+| ButtonHandler.cs | Self written |
+| DropTrig.cs | Self written |
  	
 
 ### References
