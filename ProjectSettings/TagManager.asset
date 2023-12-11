@@ -15,6 +15,7 @@ TagManager:
   - BlackHole
   - DropTrig1
   - DropTrig2
+  - PlanetC
   layers:
   - Default
   - TransparentFX

@@ -9,14 +9,15 @@ public class GameManager : MonoBehaviour
     public GameObject[] PhaseFloors;
     public GameObject PhaseFloorsParent;
     public Animator ButtonAnim;
-    private Animator WallAnim, PlanetAnims;
-    private GameObject WallParent, PlanB, PlanBM;
+    private Animator WallAnim, PlanetAnims, MoonAnims;
+    private GameObject WallParent, PlanB, PlanBM, PlanC;
     private Rigidbody WallRig;
     private Animator FloorAnim;
-    private GameObject Ding;
-    private Vector3 StartScale, TargetScale;
+    private GameObject Asteroid;
+    private Vector3 StartScale, TargetScale, PreMoonPos;
     private bool FirstActivate, SecondActivate;
     public TColl TColl;
+    public int AsteroidCount;
 
 
     void Start()
@@ -33,7 +34,16 @@ public class GameManager : MonoBehaviour
         PlanetAnims.SetBool("Stop", false);
         FirstActivate = false;
         PlanB = GameObject.Find("PlanB");
+        MoonAnims = PlanB.GetComponent<Animator>();
         PlanBM = GameObject.Find("PlanBMoon");
+        for (int i = 0; i < AsteroidCount; i++)
+        {
+            Asteroid = Instantiate(Resources.Load<GameObject>("Prefabs/Asteroid"),
+                new Vector3(Random.Range(Random.Range(160.0f, 400.0f), Random.Range(-160.0f, -400.0f)),
+                    Random.Range(100.0f, -100.0f), Random.Range(-400.0f, 400.0f)), Quaternion.identity);
+            Asteroid.transform.rotation = Random.rotation;
+            Asteroid.GetComponent<Rigidbody>().AddForce(new Vector3(Random.Range(-5f,5f),Random.Range(-5f,5f),Random.Range(-5f,5f)), ForceMode.Impulse); 
+        }
     }
 
     void Update()
@@ -57,13 +67,13 @@ public class GameManager : MonoBehaviour
             PlanB.GetComponent<Rigidbody>().isKinematic = false;
             PlanBM.GetComponent<Rigidbody>().useGravity = true;
             PlanBM.GetComponent<Rigidbody>().isKinematic = false;
+            StartCoroutine(PlanetDrop());
         }
     }
 
     private IEnumerator Disappear()
     {
         yield return new WaitForSecondsRealtime(7f);
-
         WallAnim.SetBool("Shrink", true);
         yield return new WaitForSecondsRealtime(3f);
         WallParent.SetActive(false);
@@ -88,9 +98,18 @@ public class GameManager : MonoBehaviour
             FloorAnim = pf.GetComponent<Animator>();
             FloorAnim.SetBool("Appear", true);
         }
-
         PlanetAnims.SetBool("Stop", true);
         PlanetAnims.speed = 3;
+        FirstActivate = false;
+    }
+
+    private IEnumerator PlanetDrop()
+    {
+        MoonAnims.GetComponent<Animator>().enabled = false;
+        yield return new WaitForSecondsRealtime(7f);
+        PlanetAnims.SetBool("Shrink", true);
+        yield return new WaitForSecondsRealtime(3f);
+        PlanB.SetActive(false);
         FirstActivate = false;
     }
 }
