@@ -16,8 +16,10 @@ public class GameManager : MonoBehaviour
     private GameObject Asteroid;
     private Vector3 StartScale, TargetScale, PreMoonPos;
     private bool FirstActivate, SecondActivate;
+    private GameObject DropTrig1, DropTrig2;
     public TColl TColl;
     public int AsteroidCount;
+    
 
 
     void Start()
@@ -31,6 +33,8 @@ public class GameManager : MonoBehaviour
         WallParent = GameObject.FindWithTag("WallParent");
         WallAnim = WallParent.GetComponent<Animator>();
         PhaseFloorsParent.SetActive(false);
+        DropTrig1 = GameObject.Find("DropTrig1");
+        DropTrig2 = GameObject.Find("DropTrig2");
         PlanetAnims.SetBool("Stop", false);
         FirstActivate = false;
         PlanB = GameObject.Find("PlanB");
@@ -68,6 +72,11 @@ public class GameManager : MonoBehaviour
             PlanBM.GetComponent<Rigidbody>().useGravity = true;
             PlanBM.GetComponent<Rigidbody>().isKinematic = false;
             StartCoroutine(PlanetDrop());
+            DropTrig1.SetActive(true);
+        }
+        if (TColl.Hit == 3 && FirstActivate == false)
+        {
+            
         }
     }
 

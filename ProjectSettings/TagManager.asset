@@ -16,6 +16,8 @@ TagManager:
   - DropTrig1
   - DropTrig2
   - PlanetC
+  - FinalBall
+  - FinalHoop
   layers:
   - Default
   - TransparentFX

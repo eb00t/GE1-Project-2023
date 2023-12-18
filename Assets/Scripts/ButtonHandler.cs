@@ -6,7 +6,7 @@ using UnityEngine.Events;
 
 public class ButtonHandler : MonoBehaviour
 {
-    public UnityEvent ButtonPressed, Touched;
+    public UnityEvent ButtonPressed, TouchedByPlayer, Touched;
     private Animator WholeButtAnims, ButtonAnims;
 
     private void Start()
@@ -28,8 +28,15 @@ public class ButtonHandler : MonoBehaviour
         ButtonAnims.SetTrigger("Pressed");
     }
 
-    private void OnTriggerExit(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
-        Touched.Invoke();
+        if (other.CompareTag("Player"))
+        {
+            TouchedByPlayer.Invoke();
+        }
+        else if (other.CompareTag("PlanetA") || other.CompareTag("PlanetB") || other.CompareTag("PlanetC") || other.CompareTag("FinalBall"))
+        {
+            Touched.Invoke();
+        }
     }
 }

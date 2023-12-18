@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class TColl : MonoBehaviour
 {
@@ -43,6 +44,7 @@ public class TColl : MonoBehaviour
     {
         PermaBallA.transform.position = PlanA.transform.position;
         PermaBallB.transform.position = PlanB.transform.position;
+        PermaBallC.transform.position = PlanC.transform.position;
     }
 
     void OnTriggerEnter(Collider other)
@@ -55,7 +57,7 @@ public class TColl : MonoBehaviour
             Ball.transform.SetParent(PlanA.transform);
             BallBody.isKinematic = true;
             Hit = 1;
-            BallColl.enabled = false;
+            BallColl.enabled = false; 
             PermaBallA = Ball;
         }
         if (other.gameObject.CompareTag("PlanetB"))
@@ -84,9 +86,9 @@ public class TColl : MonoBehaviour
             RB = true;
             Hoop.AddComponent<Rigidbody>();
             Hoop.GetComponent<Rigidbody>().useGravity = false;
-            //ParticleHandler.BallTrail = Ball.GetComponentInChildren<TrailRenderer>();
-            //ParticleHandler.BallTrail.gameObject.SetActive(false);
-            //ParticleHandler.BallParticlesEmission.enabled = true;
+            Hoop.GetComponent<Rigidbody>().AddForce(new Vector3(Random.Range(-5f,5f),Random.Range(-5f,5f),Random.Range(-5f,5f)), ForceMode.Impulse);
+            ParticleHandler.BallTrail.gameObject.SetActive(false);
+            ParticleHandler.BallParticlesEmission.enabled = true;
         }
     }
     
