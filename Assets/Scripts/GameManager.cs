@@ -36,6 +36,7 @@ public class GameManager : MonoBehaviour
         DropTrig1 = GameObject.Find("DropTrig1");
         DropTrig2 = GameObject.Find("DropTrig2");
         PlanetAnims.SetBool("Stop", false);
+        PlanC.GetComponent<Animator>().SetBool("CShrink", false);
         FirstActivate = false;
         PlanB = GameObject.Find("PlanB");
         MoonAnims = PlanB.GetComponent<Animator>();
@@ -72,11 +73,11 @@ public class GameManager : MonoBehaviour
             PlanBM.GetComponent<Rigidbody>().useGravity = true;
             PlanBM.GetComponent<Rigidbody>().isKinematic = false;
             StartCoroutine(PlanetDrop());
-            DropTrig1.SetActive(true);
         }
         if (TColl.Hit == 3 && FirstActivate == false)
         {
-            
+            FirstActivate = true;
+            StartCoroutine(PlanetC());
         }
     }
 
@@ -119,6 +120,17 @@ public class GameManager : MonoBehaviour
         PlanetAnims.SetBool("Shrink", true);
         yield return new WaitForSecondsRealtime(3f);
         PlanB.SetActive(false);
+        DropTrig1.SetActive(true);
+        FirstActivate = false;
+    }
+
+    private IEnumerator PlanetC()
+    {
+        yield return new WaitForSecondsRealtime(7f);
+        PlanC.GetComponent<Animator>().SetBool("CShrink", true);
+        yield return new WaitForSecondsRealtime(3f);
+        PlanC.SetActive(false);
+        DropTrig2.SetActive(true);
         FirstActivate = false;
     }
 }
