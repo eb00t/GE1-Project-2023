@@ -8,8 +8,10 @@ public class DropTrig : MonoBehaviour
 {
     public int Drops;
     private GameObject FinalHoop, FinalBall;
+    private bool HoopSpawned;
     void Start()
     { 
+        HoopSpawned = false;
         gameObject.SetActive(false);
     }
     
@@ -36,8 +38,9 @@ public class DropTrig : MonoBehaviour
             gameObject.SetActive(false);
         }
 
-        if (Drops == 2)
+        if (Drops == 2 && HoopSpawned == false)
         {
+            HoopSpawned = true;
             FinalHoop = Instantiate(Resources.Load<GameObject>("Prefabs/FinalHoop"), new Vector3(0,0,0),
                 Quaternion.identity);
         }

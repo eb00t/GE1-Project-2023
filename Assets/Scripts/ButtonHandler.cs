@@ -28,15 +28,6 @@ public class ButtonHandler : MonoBehaviour
         ButtonAnims.SetTrigger("Pressed");
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            TouchedByPlayer.Invoke();
-        }
-        else if (other.CompareTag("PlanetA") || other.CompareTag("PlanetB") || other.CompareTag("PlanetC") || other.CompareTag("FinalBall"))
-        {
-            Touched.Invoke();
-        }
+    
     }
-}
+

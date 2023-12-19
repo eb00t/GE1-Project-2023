@@ -9,14 +9,14 @@ public class GameManager : MonoBehaviour
     public GameObject[] PhaseFloors;
     public GameObject PhaseFloorsParent;
     public Animator ButtonAnim;
-    private Animator WallAnim, PlanetAnims, MoonAnims;
-    private GameObject WallParent, PlanB, PlanBM, PlanC;
+    private Animator WallAnim, PlanetAnims, MoonAnims, PlanCAnims;
+    private GameObject WallParent, HoopB, PlanB, PlanBM, PlanC;
     private Rigidbody WallRig;
     private Animator FloorAnim;
     private GameObject Asteroid;
     private Vector3 StartScale, TargetScale, PreMoonPos;
     private bool FirstActivate, SecondActivate;
-    private GameObject DropTrig1, DropTrig2;
+    public GameObject DropTrig1, DropTrig2;
     public TColl TColl;
     public int AsteroidCount;
     
@@ -33,12 +33,14 @@ public class GameManager : MonoBehaviour
         WallParent = GameObject.FindWithTag("WallParent");
         WallAnim = WallParent.GetComponent<Animator>();
         PhaseFloorsParent.SetActive(false);
-        DropTrig1 = GameObject.Find("DropTrig1");
-        DropTrig2 = GameObject.Find("DropTrig2");
+        //DropTrig1 = GameObject.Find("DropTrig1"); //I have no idea why this doesn't work.
+        //DropTrig2 = GameObject.Find("DropTrig2");
         PlanetAnims.SetBool("Stop", false);
-        PlanC.GetComponent<Animator>().SetBool("CShrink", false);
         FirstActivate = false;
         PlanB = GameObject.Find("PlanB");
+        HoopB = GameObject.Find("BallHoop2");
+        PlanC = GameObject.Find("BallHoop3");
+        PlanCAnims = PlanC.GetComponent<Animator>();
         MoonAnims = PlanB.GetComponent<Animator>();
         PlanBM = GameObject.Find("PlanBMoon");
         for (int i = 0; i < AsteroidCount; i++)
@@ -119,9 +121,10 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSecondsRealtime(7f);
         PlanetAnims.SetBool("Shrink", true);
         yield return new WaitForSecondsRealtime(3f);
-        PlanB.SetActive(false);
         DropTrig1.SetActive(true);
+        HoopB.SetActive(false);
         FirstActivate = false;
+        PlanB.SetActive(false);
     }
 
     private IEnumerator PlanetC()
@@ -129,8 +132,8 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSecondsRealtime(7f);
         PlanC.GetComponent<Animator>().SetBool("CShrink", true);
         yield return new WaitForSecondsRealtime(3f);
-        PlanC.SetActive(false);
         DropTrig2.SetActive(true);
         FirstActivate = false;
+        PlanC.SetActive(false);
     }
 }

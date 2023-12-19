@@ -17,6 +17,7 @@ public class TColl : MonoBehaviour
     private bool RB;
     private Animator BallAnims;
     public ParticleHandler ParticleHandler;
+    private AudioSource AudioSource;
     // Start is called before the first frame update
     void Start()
     {
@@ -38,6 +39,7 @@ public class TColl : MonoBehaviour
         PermaBallA = GameObject.Find("Blank");
         PermaBallB = GameObject.Find("Blank");
         PermaBallC = GameObject.Find("Blank");
+        AudioSource = GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -59,6 +61,7 @@ public class TColl : MonoBehaviour
             Hit = 1;
             BallColl.enabled = false; 
             PermaBallA = Ball;
+            AudioSource.PlayOneShot(AudioSource.GetComponent<AudioSource>().clip);
         }
         if (other.gameObject.CompareTag("PlanetB"))
         {
@@ -67,6 +70,7 @@ public class TColl : MonoBehaviour
             Hit = 2;
             BallColl.enabled = false;
             PermaBallB = Ball;
+            AudioSource.PlayOneShot(AudioSource.GetComponent<AudioSource>().clip);
         }
         if (other.gameObject.CompareTag("PlanetC"))
         {
@@ -75,6 +79,7 @@ public class TColl : MonoBehaviour
             Hit = 3;
             BallColl.enabled = false;
             PermaBallC = Ball;
+            AudioSource.PlayOneShot(AudioSource.GetComponent<AudioSource>().clip);
         }
         else
         {
