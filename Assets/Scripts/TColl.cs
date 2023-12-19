@@ -21,6 +21,7 @@ public class TColl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Hit = 0;
         Ball = GameObject.FindWithTag("PlanetA");
         ParticleHandler = Ball.GetComponent<ParticleHandler>();
         PlanA = gameObject.GetComponentInChildren<SearchTerm>().gameObject;
@@ -92,8 +93,8 @@ public class TColl : MonoBehaviour
             Hoop.AddComponent<Rigidbody>();
             Hoop.GetComponent<Rigidbody>().useGravity = false;
             Hoop.GetComponent<Rigidbody>().AddForce(new Vector3(Random.Range(-5f,5f),Random.Range(-5f,5f),Random.Range(-5f,5f)), ForceMode.Impulse);
-            ParticleHandler.BallTrail.gameObject.SetActive(false);
-            ParticleHandler.BallParticlesEmission.enabled = true;
+            other.GetComponent<ParticleHandler>().BallTrail.gameObject.SetActive(false);
+            other.GetComponent<ParticleHandler>().BallParticlesEmission.enabled = true;
         }
     }
     

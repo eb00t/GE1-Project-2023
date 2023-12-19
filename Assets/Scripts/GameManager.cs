@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
     public GameObject DropTrig1, DropTrig2;
     public TColl TColl;
     public int AsteroidCount;
+    public int Drops;
     
 
 
@@ -28,8 +29,8 @@ public class GameManager : MonoBehaviour
         PhaseFloors = GameObject.FindGameObjectsWithTag("PhaseFloor");
         PhaseFloorsParent = GameObject.Find("PhaseFloorsParent");
         PlanetAnims = GameObject.Find("PlanetB").GetComponent<Animator>();
-        ButtonAnim = GameObject.Find("InteractableButton").GetComponent<Animator>();
-        ButtonAnim.SetBool("FlyIn", false);
+//        ButtonAnim = GameObject.Find("InteractableButton").GetComponent<Animator>();
+        //ButtonAnim.SetBool("FlyIn", false);
         WallParent = GameObject.FindWithTag("WallParent");
         WallAnim = WallParent.GetComponent<Animator>();
         PhaseFloorsParent.SetActive(false);
@@ -89,7 +90,7 @@ public class GameManager : MonoBehaviour
         WallAnim.SetBool("Shrink", true);
         yield return new WaitForSecondsRealtime(3f);
         WallParent.SetActive(false);
-        ButtonAnim.SetBool("FlyIn", true);
+//        ButtonAnim.SetBool("FlyIn", true);
         SpawnPlatforms();
         /*foreach (GameObject wall in Walls)
         {
