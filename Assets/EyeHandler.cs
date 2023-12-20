@@ -9,17 +9,20 @@ public class EyeHandler : MonoBehaviour
     public int Speed;
     private Animator EyeAnims;
     private GameObject BlackCanvas;
+    private GameObject Floor;
 
     private SceneManagement SceneManagement;
+
     // Start is called before the first frame update
     void Start()
     {
-       EyeBall = GameObject.Find("Eyeball");
-       EyeAnims = GetComponent<Animator>();
-       Player = GameObject.FindWithTag("Player");
-       EyeAnims.SetBool("Interested", false);
-       BlackCanvas = GameObject.Find("BlackCanvas");
-       BlackCanvas.SetActive(false);
+        EyeBall = GameObject.Find("Eyeball");
+        EyeAnims = GetComponent<Animator>();
+        Player = GameObject.FindWithTag("Player");
+        EyeAnims.SetBool("Interested", false);
+        BlackCanvas = GameObject.Find("BlackCanvas");
+        BlackCanvas.SetActive(false);
+        Floor = GameObject.Find("Floor");
     }
 
     // Update is called once per frame
@@ -29,7 +32,8 @@ public class EyeHandler : MonoBehaviour
         if (End)
         {
             Quaternion ToRotation = Quaternion.LookRotation(Direction, Vector3.up);
-            EyeBall.transform.rotation = Quaternion.Lerp(EyeBall.transform.rotation, ToRotation, Speed * Time.deltaTime);
+            EyeBall.transform.rotation =
+                Quaternion.Lerp(EyeBall.transform.rotation, ToRotation, Speed * Time.deltaTime);
         }
     }
 
@@ -40,14 +44,7 @@ public class EyeHandler : MonoBehaviour
 
     public void FadeToBlack()
     {
-        BlackCanvas.SetActive(true);
-        StartCoroutine(Reload());
-
+        Floor.SetActive(false);
     }
 
-    IEnumerator Reload()
-    {
-        yield return new WaitForSecondsRealtime(4f);
-        SceneManagement.ReloadScene();
-    }
 }
