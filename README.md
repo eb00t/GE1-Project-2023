@@ -9,7 +9,7 @@ C21430996
 TU984 - Game Design
 ### Video:
 
-[INSERT LINK HERE]
+[[INSERT LINK HERE](https://youtu.be/kdJjiUo1By8)]
 
 ### Description of the Project
 This is a game in which the player must throw different coloured balls into hoops. The game is set in space, in between a planet that has been split in half. The player starts within a mysterious structure and must throw the ball into the hoop to proceed.
